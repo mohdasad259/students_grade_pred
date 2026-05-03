@@ -28,7 +28,8 @@ st.markdown("""
     }
 
     /* ── ALL TEXT ── */
-    body, .stMarkdown, p, span, div {
+    .stMarkdown p, .stText,
+    .element-container p {
         color: #C9A84C !important;
         font-family: 'Inter', sans-serif !important;
     }
@@ -77,6 +78,27 @@ st.markdown("""
         font-size: 0.88rem !important;
         letter-spacing: 0.5px !important;
         padding: 0.85rem 1.1rem !important;
+        list-style: none !important;
+    }
+
+    /* FIX: Hide "keyboard_arrow_down" raw icon text from Streamlit Material icons */
+    [data-testid="stExpander"] summary span[class*="material"] {
+        font-size: 0 !important;
+        line-height: 0 !important;
+        color: transparent !important;
+        width: 20px !important;
+        height: 20px !important;
+        display: inline-block !important;
+        overflow: hidden !important;
+    }
+
+    [data-testid="stExpander"] summary svg {
+        fill: #B8922A !important;
+        color: #B8922A !important;
+    }
+
+    [data-testid="stExpander"] details summary::-webkit-details-marker {
+        display: none !important;
     }
 
     /* ── INPUTS ── */
@@ -450,7 +472,7 @@ st.title("EduPredict Pro")
 st.markdown(
     "<p style='color:#6B5C2E; font-size:0.92rem; margin-top:-0.3rem; "
     "font-family:Inter,sans-serif;'>"
-    "Student performance prediction powered by KNN &amp; Naive Bayes"
+    "Student performance prediction powered by KNN & Naive Bayes"
     "</p>",
     unsafe_allow_html=True
 )
@@ -486,7 +508,7 @@ with left_col:
             format_func=lambda x: ["None","Low","Moderate","High","Very High"][x]
         )
 
-    with st.expander("Activities & Extras"):
+    with st.expander("Activities and Extras"):
         c1, c2 = st.columns(2)
         tutoring     = c1.checkbox("Tutoring")
         extra        = c2.checkbox("Extracurricular")
